@@ -1,4 +1,6 @@
+
 // Entry A — btc-race-24h-20261123-0511
+
 // Dip-entry vs SMA120, long only, CBBTC, 1m bars, $1,000 starting capital.
 //   ENTRY (flat only): close < 0.992 * SMA120  -> BUY with all cash.
 //   EXIT (holding):   close >= 1.02 * entry (TP) or close <= 0.98 * entry (SL)
@@ -34,7 +36,9 @@ await runBars({
       }
     }
 
+
     // Collect this bar's close, keeping the rolling 120-bar sum in step.
+
     for (const bar of batch.bars) {
       if (bar.symbol !== SYMBOL) continue;
       const c = BigInt(bar.c);
@@ -77,7 +81,9 @@ await runBars({
     if (pendingBuy || pendingSell) return [];
     if (closes.length < SMA_LEN) return [];
 
+
     const sum = rollingSum;
+
     if (close * 120000n < 992n * sum && state.cash > 0n) {
       pendingBuy = true;
       return [{ side: 'buy', symbol: SYMBOL, notional_quote_units: state.cash, max_slippage_bps: 100 }];
